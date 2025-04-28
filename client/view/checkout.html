@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stripe SA - Checkout Page</title>
+    <meta name="description" content="A demo of Stripe" />
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/custom.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="../js/checkout.js"></script>
+  </head>
+
+  <body>
+    <div class="text-center mt-40">
+      <h1>
+        Checkout : Stripe Press
+      </h1>
+      <h5 class="text-secondary">
+        Item# selected:  <span class="item" id="item""></span>
+      </h5>
+      
+      
+      <h5 class="mt-20 text-info">
+        Book title selected:  <span id="title" class="title" data-title="{{ title }}"></span>
+      </h5>
+     
+      
+      <hr class="mt-40">
+      <div class="mt-20 text-info" >
+        Total due:  <span id="amount" class="amount" data-amount="{{ amount }}"></span> <span id="currency" class="currency" data-currency="{{ currency }}"></span>
+        
+      </div>
+    </div>
+
+    <div class="sr-root">
+      <div class="sr-main">
+        <h1>Accept a Stripe Payment</h1>
+
+        <form id="payment-form">
+          <div id="payment-element"></div>
+          <button id="submit">Pay</button>
+          <div id="error-messages" ></div>
+          <div id="payment-result"></div>
+        </form>
+
+      </div>
+    </div>
+  </body>
+</html>

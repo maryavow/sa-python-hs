@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Thanks for being a customer !</title>
+        <meta name="description" content="Payment result page" />
+    
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="../css/normalize.css" />
+        <link rel="stylesheet" href="../css/global.css" />
+        <link rel="stylesheet" href="../css/custom.css" />
+        <script src="https://js.stripe.com/v3/"></script>
+        
+    </head>
+
+    <body>
+        
+        
+         <div class="text-center mt-40">
+            <h1>
+              Your transaction has been Processed
+            </h1>
+            <div id="error-messages" ></div>
+            <div id="payment-result" class="hidden"></div>
+          
+            
+          </div>
+        
+        <div class="mt-40 text-center">
+            <div class="mt-20 text-center text-secondary border-placeholder">
+                
+                <h5 class="text-secondary">
+                    Payment Intent ID:  <span id="payment_intent_id" ></span>
+                </h5>
+            
+                  
+                <h5 class="mt-20 text-info">
+                    Transaction Status: <span id="transaction_status"  ></span>
+                </h5>
+
+                <h5 class="mt-20 text-info">
+                    Thanks for the payment of: <span id="amount"></span> <span id="currency"></span>
+
+                </h5>
+            </div>
+
+             
+        </div>
+        <<div class="sr-root">
+            <div class="sr-main">
+            
+                <pre id="payment-intent"></pre>
+            </div>        
+        </div>    
+        
+         
+
+        <script src="../js/complete.js"></script>
+    </body>   
+    
+    </html>

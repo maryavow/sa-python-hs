@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-size: 100%;
+  line-height: 1.5;
+  background: #f2f6fa;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  margin-top: 0 ;
+  margin-bottom: 2rem ;
+  color: #d61515;
+
+}
+
+.box-shadow {
+  -webkit-box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  -moz-box-shadow:    0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  box-shadow:         0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-40 {
+  margin-top: 40px;
+}
+.border-placeholder {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: #ccc;
+  padding: 5px;
+}
+
+/* Center text and add margin at the top */
+.text-center {
+  text-align: center;
+}
+
+
+
+.text-secondary {
+  /*color: #6c757d; /* Bootstrap secondary text color */
+  color: #d6211b;
+}
+
+/* Row styling */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Column styling */
+.col {
+  flex: 1;
+  margin: 10px;
+  max-width: 30%;
+}
+
+/* Card styling */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  width: 50%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  border-radius: 5px 5px 0 0;
+  transition: transform 0.2s;
+}
+
+.card-body {
+  padding: 20px;
+  text-align: center; 
+  background-color: #fff;
+  border-radius: 0 0 5px 5px;
+  transition: background-color 0.2s;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s;  
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-top: 20px;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff; 
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.img {
+  max-width: 50%;
+  height: auto;
+}
