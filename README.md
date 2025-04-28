@@ -1,126 +1,143 @@
-# Stripe Sample Blueprint
+# Harish Srivastava 28-Apr-2025
+# Steps of how I built it, resources used and specific changes I did to the sample python program provided as part of the process.
 
-This is a repo to help you get started with creating a sample.
+------------------------------------------------------------------------------------------------------
+# A. How to build, configure and run your application
 
-1. Clone this repository and add the sample specific logic.
+Please refer to /server/README.md for instructions
 
-```
-git clone https://github.com/stripe-samples/template
-```
+## Application Overview
+This is a 3-page application that demonstrates a simple e-commerce flow using Stripe APIs for payment processing.
 
-2. Language specific instructions:
+### Pages:
+1. **Page 1: `index.html` / `index.js`**
+   - Base navigation page where customers can select one of three books to purchase.
+   - Redirects the customer to the checkout page.
 
-   - Update the Java artifactId to use a specific sample related name. Update the README with the right package name.
+2. **Page 2: `checkout.html` / `checkout.js`**
+   - Checkout functionality where Stripe APIs are called:
+     - Fetches the publishable key.
+     - Creates a payment intent using the client secret.
+     - Renders the Stripe Payment Element for secure payment.
 
-3. Update the sample README below and delete this boilerplate text.
+3. **Page 3: `complete.html` / `complete.js`**
+   - Confirmation page that displays the `payment_intent_id` and the transaction status.
 
-4. Update the .cli.json with details on your sample.
+## Prerequisites:
+1. Install Python 3.6+ and Flask.
+2. Install dependencies listed in `requirements.txt`.
+3. Set up a `.env` file with the following keys:
+   - `STRIPE_SECRET_KEY`
+   - `STRIPE_PUBLISHABLE_KEY`
+   - `FLASK_SECRET_KEY`
+   - `STRIPE_API_VERSION`
+   - `STATIC_DIR`
+   
+## Testing the application
+1. Follow the instructions in `/server/README.md` to set up the environment.
+2. Start the Flask server:
+   ```bash
+   python server.py
+3. Open your browser and navigate to http://localhost:4242
+4. Test the checkout flow using Stripe's test card data:
+    - Card Number: 4242 4242 4242 4242
+    - Expiration Date: Any future date
+    - CVC: Any 3-digit number 
+    - [See https://stripe.com/docs/testing]
 
-5. Update the sample CONTRIBUTING.md file with the correct links and Stripe features.
 
-Below is everything you should include in your original sample README. Everything above should be deleted.
+------------------------------------------------------------------------------------------------------
+# B. How does the solution work? Which Stripe APIs does it use? How is my application architected?
 
-# Name of sample
+## Architecture of application
+1. Client side: 
+    - HTML, JavaScript, CSS, and static assets are located under /client.
+    - Handles user interactions and renders the Stripe Payment Element.
 
-A brief description of what this sample shows. Keep it 3 - 5 sentences.
+2. Server-Side:
+    - Python Flask application located in /server/server.py.
+    - Handles API routes for:
+        /config: Fetches the publishable key.
+        /checkout: Provides item details (stubbed database).
+        /create-payment-intent: Creates a payment intent using Stripe APIs.
+        
+3. Database Stub:
+    - The /checkout endpoint acts as a stub for a database, providing hardcoded item details.
 
-A quick screenshot of the demo view:
-<img src="https://cf.ltkcdn.net/dogs/images/std/236742-699x450-cutest-puppy-videos.jpg" alt="Preview of sample" align="center">
+4. Folder Structure 
+    /client
+        /css
+        /images
+        /js
+        /view
+    /server
+        server.py
+        .env
 
-Features:
+## Stripe APIs and Concepts used
 
-- One cool thing about this sample 😃
-- Another cool thing about the sample 🏋️
-- The final cool thing about the sample 💡
+1. Payment Intent API:
+        Creates a payment intent with the specified amount and currency.
+2. Payment Element:
+        Renders a secure payment form on the client side.
+3.  Stripe Dashboard:
+        Used to configure payment methods (e.g., Card, Afterpay, Klarna).
 
-## How to run locally
+------------------------------------------------------------------------------------------------------
+# C. * How did I approach this problem? Which docs did I use to complete the project? What challenges did I encounter?
 
-This sample includes 5 server implementations in Node, Ruby, Python, Java, and PHP.
+## Framework : 
+1. FLASK
 
-Follow the steps below to run locally.
+## IDE : 
+1. VSCode on Mac
+2. Extensions used 
+    1. Python
+    2. Pthon debugger
+    3. Pylance
+    4. Ruff
+    5. Stripe
+    6. Github Copilot
+    7. Github Copilot chat
 
-**1. Clone and configure the sample**
+## Stripe Dashboard Configuration
+1. Activated the payment methods CARD, AFTERPAY, KLARNA
+2. Copied the API keys from the Stripe developer dashbiard https://dashboard.stripe.com/test/apikeys to the .env file
 
-The Stripe CLI is the fastest way to clone and configure a sample to run locally.
+## Stripe documentations and other resources used
+1. Sample code as provided in email : https://github.com/marko-stripe/sa-takehome-project-python/tree/master
+2. Payment Element Docs: https://docs.stripe.com/payments/payment-element?locale=en-GB
+3. Stripe Quickstart Guide  https://docs.stripe.com/payments/quickstart
+4. Youtube video : Video Payment Element using python https://www.youtube.com/watch?v=tCSbCk5j3Tk
+5. Payment Intent Docs: https://docs.stripe.com/payments/payment-intents
 
-**Using the Stripe CLI**
+## Challenges encountered on Server side:  server.py, and .env
+1. used  g, session from flask to ensure sensitive information (e.g., amount) is not exposed or be alteed by client
+2. created a secret flask key in .env
+3. Defined the /config and /create-payment-intent routes
+4. Made adjustements to /checkout route to use g and store the anount so that it can't be altered on client side
+5. added STRIPE_API_VERSION and FLASK_SECRET_KEY to .env
 
-If you haven't already installed the CLI, follow the [installation steps](https://github.com/stripe/stripe-cli#installation) in the project README. The CLI is useful for cloning samples and locally testing webhooks and Stripe integrations.
 
-In your terminal shell, run the Stripe CLI command to clone the sample:
+------------------------------------------------------------------------------------------------------
+# D. How I might extend this if I was building a more robust instance of the same application.
 
-```
-stripe samples create REPLACE-WITH-NAME
-```
+## User Experience
+1. Authenticated experience
+2. Ensure responsiveness in the app across device form factors
+3. Use locale to pull language/currency. At the moment its kinda hardocded to EN/AUD on server side
+4. Better error handling, and confirmation messages before url redirects for better UX
 
-The CLI will walk you through picking your integration type, server and client languages, and configuring your .env config file with your Stripe API keys.
+## Application non-functional
+ 
+1. Using database tier and a cart framework
+2. Havent done any server-side scaling or other non-functional like accessibility
+3. Look at reusability
+4. Have very lightly used session vars
+5. Possibly explore Websockets which I haven't in this submission
+6. Better logging on server side
+7. have ROUTE to get the CLIENT_SECRET rather than reliance on URL parameters
 
-**Installing and cloning manually**
-
-If you do not want to use the Stripe CLI, you can manually clone and configure the sample yourself:
-
-```
-git clone https://github.com/stripe-samples/REPLACE-WITH-NAME
-```
-
-Copy the .env.example file into a file named .env in the folder of the server you want to use. For example:
-
-```
-cp .env.example server/node/.env
-```
-
-You will need a Stripe account in order to run the demo. Once you set up your account, go to the Stripe [developer dashboard](https://stripe.com/docs/development#api-keys) to find your API keys.
-
-```
-STRIPE_PUBLISHABLE_KEY=<replace-with-your-publishable-key>
-STRIPE_SECRET_KEY=<replace-with-your-secret-key>
-```
-
-`STATIC_DIR` tells the server where to the client files are located and does not need to be modified unless you move the server files.
-
-**2. Follow the server instructions on how to run:**
-
-Pick the server language you want and follow the instructions in the server folder README on how to run.
-
-For example, if you want to run the Node server:
-
-```
-cd server/node # there's a README in this folder with instructions
-npm install
-npm start
-```
-
-**3. [Optional] Run a webhook locally:**
-
-If you want to test the `using-webhooks` integration with a local webhook on your machine, you can use the Stripe CLI to easily spin one up.
-
-Make sure to [install the CLI](https://stripe.com/docs/stripe-cli) and [link your Stripe account](https://stripe.com/docs/stripe-cli#link-account).
-
-```
-stripe listen --forward-to localhost:4242/webhook
-```
-
-The CLI will print a webhook secret key to the console. Set `STRIPE_WEBHOOK_SECRET` to this value in your .env file.
-
-You should see events logged in the console where the CLI is running.
-
-When you are ready to create a live webhook endpoint, follow our guide in the docs on [configuring a webhook endpoint in the dashboard](https://stripe.com/docs/webhooks/setup#configure-webhook-settings).
-
-**4. [Mobile clients] Set up the client app:**
-
-Finally, choose a mobile client implementation and follow the instruction in the app's README (e.g. `using-webhooks/client/ios/README.md`) to run.
-
-When the app is running, use `4242424242424242` as a test card number with any CVC code + a future expiration date.
-
-Use the `4000000000003220` test card number to trigger a 3D Secure challenge flow.
-
-Read more about testing on Stripe at https://stripe.com/docs/testing.
-
-## FAQ
-
-Q: Why did you pick these frameworks?
-
-A: We chose the most minimal framework to convey the key Stripe calls and concepts you need to understand. These demos are meant as an educational tool that helps you roadmap how to integrate Stripe within your own system independent of the framework.
 
 ## Get support
 
