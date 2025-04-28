@@ -152,9 +152,11 @@ If you have questions, comments, or need help with code, we're here to help:
 Sign up to [stay updated with developer news](https://go.stripe.global/dev-digest).
 
 ## Author(s)
-
+The Original sample files were authored by
 [@adreyfus-stripe](https://twitter.com/adrind)
 
+Files were amended and more functionality added by Harish Srivastava
+[Harish Srivastava](https://github.com/maryavow)
 ## Contributing
 
 If you'd like to contribute to this sample, please check out the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md)
